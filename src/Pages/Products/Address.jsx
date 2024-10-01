@@ -220,7 +220,7 @@ function Address() {
                 // Use a slight delay to ensure the alert has time to be shown before redirecting
                 setTimeout(() => {
                     window.location.href = '/myOrders';
-                }, 500);
+                }, 3000);
             })
             .catch((error) => {
                 console.error('Error adding product to cart:', error);
