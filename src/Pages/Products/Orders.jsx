@@ -198,7 +198,7 @@ import 'jspdf-autotable';
 
 function Orders() {
     const userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
-    const uniqueId = userInfo["custom:uniqueId"]
+    const uniqueId = userInfo && userInfo["custom:uniqueId"]
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [invoices, setInvoices] = useState({}); // State to store invoices
@@ -381,7 +381,7 @@ function Orders() {
             )}
         </div>
     );
-    
+
 }
 
 export default Orders;
