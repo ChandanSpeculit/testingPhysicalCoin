@@ -1,0 +1,117 @@
+.chandan {
+    /* border: 2px solid red; */
+    display: flex;
+    width: 90%;
+    margin: auto;
+    align-self: center;
+    justify-content: space-evenly;
+    align-items: center;
+    /* Align items vertically center */
+}
+
+.sipimage1 {
+    width: 30%;
+    align-self: center;
+    /* Align image vertically center */
+    justify-content: center;
+    /* Align items horizontally center */
+    transition: transform 0.3s ease-in-out;
+    /* Add transition for smooth zoom effect */
+    cursor: pointer;
+    /* Change cursor to pointer on hover */
+}
+.last-image {
+    width: 30%;
+    align-self: center;
+    /* Align image vertically center */
+    justify-content: center;
+    /* Align items horizontally center */
+    transition: transform 0.3s ease-in-out;
+    /* Add transition for smooth zoom effect */
+    cursor: pointer;
+    /* Change cursor to pointer on hover */
+}
+
+.sipimage1:hover {
+    transform: scale(1.1);
+    /* Zoom in the image a little bit on hover */
+}
+
+.sipDescContainer {
+    width: 40%;
+    /* display: flex; */
+    align-items: center;
+    /* Align items vertically center */
+    justify-content: center;
+    /* Align items horizontally center */
+}
+.sipDesc {
+    font-size: 20px;
+    text-align: left;
+    font-weight: 400;
+    font-family: 'Poppins';
+}
+.sipTitle{
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Poppins';
+    margin-bottom: 10px;
+    color: #1E3A8A;
+    /* background-color: red; */
+
+}
+
+
+@media (max-width: 1024px) {
+    .chandan {
+        flex-direction: column;
+        /* Stack items vertically */
+        width: 90%;
+    }
+
+    .sipimage1 {
+        width: 50%;
+        margin-bottom: 20px;
+        /* Add spacing between image and text */
+    }
+    .last-image {
+        width: 50%;
+        margin-bottom: 20px;
+        /* Add spacing between image and text */
+    }
+    .sipDescContainer {
+        width: 80%;
+    }
+
+    .sipDesc {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 768px) {
+    .chandan {
+        flex-direction: column;
+        /* Stack items vertically */
+        width: 100%;
+    }
+
+    .sipimage1 {
+        width: 70%;
+        margin-bottom: 20px;
+        /* Add spacing between image and text */
+    }
+    .last-image {
+        width: 70%;
+        margin-bottom: 20px;
+        /* Add spacing between image and text */
+    }
+
+    .sipDescContainer {
+        width: 90%;
+    }
+
+    .sipDesc {
+        font-size: 20px;
+    }
+}
