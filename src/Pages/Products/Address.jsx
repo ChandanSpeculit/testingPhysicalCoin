@@ -219,7 +219,7 @@ function Address() {
                 alert("Payment Done");
                 // Use a slight delay to ensure the alert has time to be shown before redirecting
                 setTimeout(() => {
-                    navigate('/myOrders');
+                    navigate('/');
                 }, 3000);
             })
             .catch((error) => {
