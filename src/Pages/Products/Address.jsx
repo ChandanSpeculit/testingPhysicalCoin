@@ -1,9 +1,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Address() {
     const location = useLocation();
+    const navigate = useNavigate();
     const userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
     const uniqueId = userInfo["custom:uniqueId"]
     const product = location.state?.product;
@@ -219,7 +221,7 @@ function Address() {
                 alert("Payment Done");
                 // Use a slight delay to ensure the alert has time to be shown before redirecting
                 setTimeout(() => {
-                    navigate('/');
+                    navigate('/myOrders');
                 }, 3000);
             })
             .catch((error) => {
