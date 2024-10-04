@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import loginImage from "../assets/images/loginImage.png";
+import loginImage from "../assets/images/Login_Left_Image.png";
 import logo from "../assets/images/logoWhite.png";
 import { API_GATEWAY_URL } from "../config/env-vars";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -160,8 +160,9 @@ const SignUp = () => {
 
   const LeftContainer = () => {
     return (
-      <div className="w-2/5">
-        <img src={loginImage} alt="Your Image" className="w-64 h-auto md:mt-20 md:mb-20" />
+      <div className="w-2/5 hidden lg:flex lg:flex-col items-center justify-center bg-gradient-to-r from-newDarkGold via-newLightGold to-newDarkGold ">
+        <h1 className="text-5xl text-newDarkBlue font-poppins font-semibold">Join Fiydaa</h1>
+        <img src={loginImage} alt="Your Image" className="  w-64 h-auto  " />
       </div>
     );
   };
@@ -409,10 +410,10 @@ const SignUp = () => {
     }, [timer, resendActive]);
 
     return (
-      <div className="bg-gradient-to-r from-newDarkBlue via-newLightBlue to-newDarkBlue  flex-1 flex flex-col pt-10 px-7">
+      <div className="bg-gradient-to-r from-newDarkBlue via-newLightBlue to-newDarkBlue  flex-1 flex flex-col pt-10">
         <Link
           to="/"
-          className="flex items-center gap-2 text-lg text-white"
+          className="flex items-center gap-2 text-lg text-white ml-4"
         >
           <FontAwesomeIcon
             icon={faArrowLeft}
@@ -420,11 +421,11 @@ const SignUp = () => {
           />
           Back
         </Link>
-        <img src={logo} alt="logo" className="w-48 h-auto ml-12 my-16" />
-        <h1 className="text-5xl font-semibold mb-4 text-newDarkGold ml-16 mr-24 font-poppins">
-          Sign up now & start your financial journey
+        <img src={logo} alt="logo" className="w-48 h-auto ml-4  sm:ml-16 my-12 sm:mt-16 sm:mb-12" />
+        <h1 className="text-3xl sm:4xl lg:text-4xl leading-relaxed font-medium mb-4 text-newDarkGold ml-4 mr-2 sm:ml-16 sm:mr-24 font-poppins" >
+          Sign up now to Start Investing
         </h1>
-        <h2 className="text-2xl font-regular font-poppins mb-4 text-newLightGold ml-16">
+        <h2 className="text-sm font-regular font-poppins mb-10 text-newLightGold ml-4 mr-2 sm:ml-16">
           Welcome to Fiydaa family, Provide details to create your account
         </h2>
 
@@ -441,11 +442,11 @@ const SignUp = () => {
         </div> */}
 
         {!otpSent && (
-          <div className="ml-16 mr-32 mt-4">
+          <div className="mx-4 sm:ml-16 sm:mr-32">
             <label className="text-newDarkGold text-lg font-poppins ">
-              Mobile Number
+              Mobile Number *
             </label>
-            <div className=" mt-2 mb-4 p-2 flex gap-3  items-center border-2 border-newDarkGold rounded-xl">
+            <div className="w-full md:w-2/3 mt-2 mb-4 p-2 flex gap-3 md:gap-2  items-center border-2 border-newDarkGold rounded-xl">
               <p className="text-newDarkGold text-xl ">+91 |</p>
               <input
                 type="text"
@@ -461,30 +462,16 @@ const SignUp = () => {
                 Please Enter a valid Mobile Number
               </p>
             )}
-            {/* <label className="text-darkBlue text-sm font-semibold mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              placeholder="robert.langster@gmail.com"
-              value={email}
-              onChange={handleEmailChange}
-              className="bg-white px-4 py-2 rounded-xl mb-4 border-2  border-darkBlue placeholder:font-normal placeholder:text-placeholderblack placeholder:text-sm "
-            />
-            {message === "Email" && (
-              <p className="text-red-500 mb-2 font-normal text-sm">
-                Please Enter a valid Email address
-              </p>
-            )} */}
-            <div className="flex-row">
+            
+            <div className="flex-row mt-8 mb-4  ">
 
-              <label className="text-newDarkGold text-lg font-poppins ">
+              {/* <label className="text-newDarkGold text-lg font-poppins ">
                 Select State
-              </label>
+              </label> */}
               <select
                 value={selectedState}
                 onChange={handleStateChange}
-                className="bg-white px-4 py-2 ml-5 rounded-xl mb-4 border-2 border-newDarkGold"
+                className="bg-white px-5 py-2 rounded-xl  border-2 border-newDarkGold"
               >
                 <option value="">Select State</option>
                 {stateData.map((state) => (
@@ -499,7 +486,7 @@ const SignUp = () => {
                 Please Select a state
               </p>
             )}
-            <div className="flex items-center mb-2">
+            <div className="flex items-center mb-10">
               <Link to="/privacy-policy" target="_blank" rel="noopener noreferrer">
 
                 <p
@@ -519,7 +506,7 @@ const SignUp = () => {
 
             </div>
             {message === "Terms" && (
-              <p className="text-red-500 mb-2 font-normal text-sm">
+              <p className="text-red-500 font-normal text-sm">
                 Please accept the terms & condition
               </p>
             )}
@@ -560,11 +547,11 @@ const SignUp = () => {
         )}
 
         {otpSent && (
-          <div className="ml-16 mr-32 mt-4">
+          <div className="mx-4 sm:ml-16 sm:mr-32">
             <label className="text-newDarkGold text-lg font-poppins">
               OTP
             </label>
-            <div className=" mt-2 mb-4 p-2  border-2 border-newDarkGold rounded-xl">
+            <div className="w-full md:w-2/3 mt-2 mb-4 p-2  border-2 border-newDarkGold rounded-xl">
 
               <input
                 type="text"
@@ -575,7 +562,7 @@ const SignUp = () => {
               />
             </div>
 
-            <div className="flex mb-4">
+            <div className="flex mb-10">
               <button
                 onClick={handleResend}
                 disabled={!resendActive} // Disable the button when it's not active
@@ -588,7 +575,7 @@ const SignUp = () => {
             <div className="flex mb-4">
               <button
                 onClick={handleVerify}
-                className=" w-2/5 bg-gradient-to-r from-newDarkGold via-newLightGold to-newDarkGold text-newLightBlue font-poppins font-medium px-6 py-2 rounded-md"
+                className="w-3/5 sm:w-2/5 bg-gradient-to-r from-newDarkGold via-newLightGold to-newDarkGold text-newLightBlue font-poppins font-medium px-6 py-2 rounded-md"
                 >
                 Submit OTP
               </button>
@@ -596,14 +583,12 @@ const SignUp = () => {
           </div>
         )}
 
-        <div>
           <Link
             to="/login"
-            className="ml-16 text-newDarkGold font-poppins font-medium hover:text-newLightGold "
-          >
+            className=" ml-4 mr-4 mb-8 sm:ml-16 text-newDarkGold font-poppins font-medium hover:text-newLightGold "
+            >
             Already have an account ? Click to login
           </Link>
-        </div>
       </div>
     );
   };

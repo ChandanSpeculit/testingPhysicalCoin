@@ -1,6 +1,10 @@
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom'
+import Footer from '../../components/Footer';
+import Navbar from '../../components/Navbar';
 
 function ParticularProduct() {
   const navigate = useNavigate();
@@ -33,6 +37,7 @@ function ParticularProduct() {
       })
       .then((data) => {
         const parsedData = JSON.parse(data.body);
+        console.log(parsedData)
         setProduct(parsedData);
         setLoading(false);
       })
@@ -170,20 +175,31 @@ function ParticularProduct() {
         )}
       </div> */}
 
+      {/* <Link
+        to="/"
+        className="flex items-center gap-2 text-lg text-black ml-10"
+      >
+        <FontAwesomeIcon
+          icon={faArrowLeft}
+          className=""
+        />
+        Back
+      </Link> */}
 
-      {!loading && product && Object.keys(product).length > 0 && (
+
+      {/* {!loading && product && Object.keys(product).length > 0 && (
         <section class="relative ">
           <div class="w-full mt-8 mx-auto px-4 sm:px-6 lg:px-0">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-32 mx-auto max-md:px-2 ">
-              {/* <div class="img"> */}
               <div class="img-box h-full max-lg:mx-auto ">
-                <img src={product.productImage} alt=""
-                  class="max-lg:mx-auto lg:ml-auto h-4/6 object-cover" />
+                <img src={"https://gold-loan-uat-new-org.s3.ap-south-1.amazonaws.com/products/1658816665496.jpeg"} alt=""
+                  class="max-lg:mx-auto lg:ml-auto h-4/6 object-cover border border-newDarkGold" />
               </div>
-              {/* </div> */}
+             
               <div>
                 <div class="data w-full max-w-xl">
-                  <h2 class="font-manrope font-bold text-3xl leading-10 text-gray-900 mb-2 capitalize">{product.productName}</h2>
+                  <h2 class="font-inter font-bold text-3xl leading-10 text-gray-900 mb-2 capitalize">{product.productName}</h2>
+                  <h3></h3>
                   <div class="flex flex-col sm:flex-row sm:items-center mb-6">
                     <h6
                       class="font-manrope font-semibold text-2xl leading-9 text-gray-900 pr-5 sm:border-r border-gray-200 mr-5">
@@ -201,48 +217,7 @@ function ParticularProduct() {
                   <p class="text-gray-500 text-base font-normal mb-5">
                     {product.metaDescription}
                   </p>
-                  <ul class="grid grid-cols-2 gap-y-4 mb-8 ">
-                    <li class="flex items-center gap-3">
-                      <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <rect width="26" height="26" rx="13" fill="#4F46E5" />
-                        <path
-                          d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
-                          stroke="white" stroke-width="1.6" stroke-linecap="round" />
-                      </svg>
-                      <span class="font-normal text-base text-gray-900 ">24k Certified Pure Gold</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                      <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <rect width="26" height="26" rx="13" fill="#4F46E5" />
-                        <path
-                          d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
-                          stroke="white" stroke-width="1.6" stroke-linecap="round" />
-                      </svg>
-                      <span class="font-normal text-base text-gray-900 ">100% Secured</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                      <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <rect width="26" height="26" rx="13" fill="#4F46E5" />
-                        <path
-                          d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
-                          stroke="white" stroke-width="1.6" stroke-linecap="round" />
-                      </svg>
-                      <span class="font-normal text-base text-gray-900 ">BIS Hallmarked</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                      <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <rect width="26" height="26" rx="13" fill="#4F46E5" />
-                        <path
-                          d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
-                          stroke="white" stroke-width="1.6" stroke-linecap="round" />
-                      </svg>
-                      <span class="font-normal text-base text-gray-900 ">No Extra Charges</span>
-                    </li>
-                  </ul>
+                  
                   <h6 class="font-manrope font-semibold text-2xl leading-9 text-gray-900 pr-5 sm:border-r border-gray-200 mr-5">
                     Total Price: ₹{(product.productPrice[0]?.finalProductPrice * quantity).toFixed(2)}                      </h6>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-8">
@@ -273,15 +248,7 @@ function ParticularProduct() {
                         </svg>
                       </button>
                     </div>
-                    <button onClick={() => addToCart(product)}
-                      class="group py-4 px-5 rounded-full bg-indigo-50 text-indigo-600 font-semibold text-lg w-full flex items-center justify-center gap-2 transition-all duration-500 hover:bg-indigo-100">
-                      <svg class="stroke-indigo-600 " width="22" height="22" viewBox="0 0 22 22" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M10.7394 17.875C10.7394 18.6344 10.1062 19.25 9.32511 19.25C8.54402 19.25 7.91083 18.6344 7.91083 17.875M16.3965 17.875C16.3965 18.6344 15.7633 19.25 14.9823 19.25C14.2012 19.25 13.568 18.6344 13.568 17.875M4.1394 5.5L5.46568 12.5908C5.73339 14.0221 5.86724 14.7377 6.37649 15.1605C6.88573 15.5833 7.61377 15.5833 9.06984 15.5833H15.2379C16.6941 15.5833 17.4222 15.5833 17.9314 15.1605C18.4407 14.7376 18.5745 14.0219 18.8421 12.5906L19.3564 9.84059C19.7324 7.82973 19.9203 6.8243 19.3705 6.16215C18.8207 5.5 17.7979 5.5 15.7522 5.5H4.1394ZM4.1394 5.5L3.66797 2.75"
-                          stroke="" stroke-width="1.6" stroke-linecap="round" />
-                      </svg>
-                      Add to cart</button>
+
                   </div>
                   <div class="flex items-center gap-3">
                     <button
@@ -308,7 +275,124 @@ function ParticularProduct() {
             </div>
           </div>
         </section>
-      )}
+      )} */}
+
+      <Navbar />
+
+      {!loading && <>
+        <div className=" lg:flex-row items-start p-8 max-w-7xl mx-auto">
+          {/* Left Content */}
+
+          <Link
+            to="/"
+            className="flex items-center gap-2 text-black mb-8 font-poppins"
+          >
+            <FontAwesomeIcon
+              icon={faArrowLeft}
+              className=""
+            />
+            Back
+          </Link>
+          <nav className="flex items-center gap-2 text-gray-500 mb-8 font-poppins">
+            <span>{product && product.subCategory?.category.categoryName}</span> / <span>{product && product.subCategory?.subCategoryName}</span>
+          </nav>
+
+          <div className='flex flex-col-reverse md:flex-row'>
+            <div className="lg:w-1/2 sm:pr-8 mt-8">
+              {/* Product Title */}
+              <h1 className="text-xl sm:text-4xl font-poppins font-semibold mb-4">{product.productName}</h1>
+              {/* <h3 className='text-2xl font-poppins font-medium mb-8'>(911 Purity)</h3> */}
+
+              <div className='flex gap-2 mb-8'>
+                <h3 className='text-base sm:text-base font-poppins font-regular'>Product Weight :</h3>
+                <h3 className='text-base sm:text-base font-poppins font-medium'>{product.weight} grams</h3>
+              </div>
+
+              {/* Price and Reviews */}
+              <div className="flex flex-col mb-4">
+                <span className="text-lg md:text-xl font-medium font-poppins mb-4 text-newDarkBlue">₹ {product?.productPrice?.[0]?.finalProductPrice}</span>
+                {/* <span className="ml-4 text-yellow-500 flex items-center">
+              ★★★★☆ <span className="ml-1 text-gray-500">(1624 reviews)</span>
+            </span> */}
+
+                <span className="text-base md:text-xl font-light text-gray-400">(MRP inclusive of all taxes)</span>
+              </div>
+
+
+              <div className=" space-y-4 mb-8">
+                <div className="inline-flex items-center space-x-5 border rounded-lg px-6 py-2 w-auto">
+                  <button onClick={handleDecreaseQuantity} className="text-xl">-</button>
+                  <span className='text-xl'>{quantity}</span>
+                  <button onClick={handleIncreaseQuantity} className="text-xl">+</button>
+                </div>
+
+                <div>
+                  <button onClick={() => {
+                    navigate('/address', { state: { product, quantity } });
+                  }}
+                    className="bg-gradient-to-r from-newDarkBlue via-newLightBlue to-newDarkBlue text-white hover:text-newLightGold font-bold py-3 px-6 rounded-md">
+                    Buy now →
+                  </button>
+                </div>
+              </div>
+
+              <div className="border border-newDarkGold text-newDarkBlue rounded-lg p-4 w-full">
+                <h2 className="text-lg sm:text-2xl font-semibold font-poppins mb-4">Product Properties</h2>
+                <div className="grid grid-cols-2  justify-between items-center">
+                  <div>
+                    <p className="text-base sm:text-lg font-semibold">{product.sku}</p>
+                    <p className="text-sm text-newLightBlue font-poppins font-regular">SKU</p>
+                  </div>
+
+                  <div>
+                    <p className="text-base sm:text-lg font-semibold font-poppins">{product && product.subCategory?.category.metalType.metalType.toUpperCase()}</p>
+                    <p className="text-sm text-newLightBlue font-poppins font-regular">Metal Type</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div className="md:w-1/2 mt-4 lg:mt-0">
+              <img
+                src={product && product.productImage}
+                alt="Everyday Ruck Snack"
+                className="rounded-lg border border-newDarkGold"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className=" z-20 fixed bottom-0 left-0 w-full bg-white border-t border-gray-200">
+          <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div>
+              <p className="text-lg font-medium">Price</p>
+              <p className="text-2xl font-semibold">₹{product?.productPrice?.[0]?.finalProductPrice * quantity} <span className="text-sm font-normal">MRP Inclusive of all taxes</span></p>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4 border rounded-lg px-3 py-1">
+                <button onClick={handleDecreaseQuantity} className="text-xl">-</button>
+                <span>{quantity}</span>
+                <button onClick={handleIncreaseQuantity} className="text-xl">+</button>
+              </div>
+
+              <button onClick={() => {
+                navigate('/address', { state: { product, quantity } });
+              }}
+                className="bg-gradient-to-r from-newDarkBlue via-newLightBlue to-newDarkBlue text-white hover:text-newLightGold font-bold py-3 px-6 rounded-md">
+                Buy now →</button>
+            </div>
+          </div>
+        </div>
+      </>
+      }
+      {loading &&
+        <p className='ml-20 mt-20'> Loading product details...</p >
+      }
+
+      <div className='mb-20'>
+        <Footer />
+      </div>
 
     </>
 

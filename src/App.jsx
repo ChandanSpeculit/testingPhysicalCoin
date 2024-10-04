@@ -133,10 +133,10 @@ function App() {
   return (
     <>
       <ScrollToTop />
-      <Navbar />
+      {/* <Navbar /> */}
       <Facebook />
       {userToken ? <MainStack /> : <AuthStack />}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
