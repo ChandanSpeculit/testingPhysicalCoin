@@ -9,6 +9,8 @@ import writtenBlog4 from "../assets/BlogsImages/writtenBlog4.png"
 import PPFvsMutualFund from "../assets/BlogsImages/PPFvsMutualFund.png"
 import CanaraBankGold from "../assets/BlogsImages/CanaraBankGold.png"
 import CDeductions from "../assets/BlogsImages/80CDeductions.png"
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 
 
@@ -147,6 +149,7 @@ function Blogs() {
 
     return (
         <>
+            <Navbar />
             <section class="mx-auto  pb-4 px-4 sm:px-8 bg-[#FCF9F7]">
                 <div class="text-center space-y-4">
                     <h1 class="text-gray-800 font-bold text-4xl md:text-5xl">
@@ -185,6 +188,8 @@ function Blogs() {
                     </div>
                 </div>
             </section>
+
+            <Footer />
 
 
             {/* <section class="py-14 bg-[#FCF9F7]">

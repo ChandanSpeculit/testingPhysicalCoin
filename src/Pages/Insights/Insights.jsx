@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 function Insights() {
   const links = [
     { text: "Daily Reports", to: "/Insights/DailyReports" },
@@ -31,6 +32,8 @@ function Insights() {
 
   return (
     <>
+      <Navbar />
+
       <div className="flex justify-center w-full  min-h-[800px]">
         <div className="w-11/12 border-none sm:w-full">
           <div className="flex justify-center mt-5 text-3xl text-black font-bold font-[Gilroy]">
@@ -60,6 +63,8 @@ function Insights() {
           </div>
         </div>
       </div>
+      <Footer />
+
     </>
   );
 }

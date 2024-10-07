@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
-
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 function TermsAndCondition() {
 
@@ -25,6 +26,8 @@ function TermsAndCondition() {
 
     return (
         <>
+            <Navbar />
+
             <div style={{ width: '70%', margin: 'auto', marginTop: '20px', marginBottom: '20px', textAlign: 'justify', fontFamily: 'Poppins' }}>
 
                 <div style={{ margin: 'auto', marginBottom: '20px', textAlign: 'center' }}>
@@ -169,16 +172,18 @@ function TermsAndCondition() {
 
 
                 <p class="text-2xl font-poppins mb-4">Contact Us :</p>
-                <span style={{color:"#0043e9",}}>
+                <span style={{ color: "#0043e9", }}>
 
-                Clearwater Capital Pvt. Ltd. <br />
-                1st FLOOR, 945/3, Pachranga Bazar, Panipat, Haryana, 132103 <br />
-                Tel: +91 - 9053037500 <br />
-                Email: support@fiydaa.in <br /></span>
+                    Clearwater Capital Pvt. Ltd. <br />
+                    1st FLOOR, 945/3, Pachranga Bazar, Panipat, Haryana, 132103 <br />
+                    Tel: +91 - 9053037500 <br />
+                    Email: support@fiydaa.in <br /></span>
 
 
 
             </div>
+            <Footer />
+
         </>
     )
 }

@@ -14,6 +14,8 @@ import rishabh_image from "../assets/images/rishabh.png";
 import janhvi_image from "../assets/images/Janhvi.jpg"
 import "../App.css";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+
 import { FaLinkedin } from "react-icons/fa";
 import { Helmet } from "react-helmet";
 
@@ -57,18 +59,18 @@ const AboutUsPage = () => {
         pankaj_image,
       linkedin: "https://www.linkedin.com/in/pankaj-d-551382294/"
     },
-    {
-      name: "Joedeep Singh",
-      designation: "Software Development Engineer",
-      image: Joedeep_image,
-      linkedin: "https://www.linkedin.com/in/joedeep-singh-8ab372191/"
-    },
-    {
-      name: "Snehali Teltumbde",
-      designation: "Software Development Engineer",
-      image: Snehali_image,
-      linkedin: "https://www.linkedin.com/in/snehali-teltumbde-bb067a1b3/"
-    },
+    // {
+    //   name: "Joedeep Singh",
+    //   designation: "Software Development Engineer",
+    //   image: Joedeep_image,
+    //   linkedin: "https://www.linkedin.com/in/joedeep-singh-8ab372191/"
+    // },
+    // {
+    //   name: "Snehali Teltumbde",
+    //   designation: "Software Development Engineer",
+    //   image: Snehali_image,
+    //   linkedin: "https://www.linkedin.com/in/snehali-teltumbde-bb067a1b3/"
+    // },
     {
       name: "Sahil Garg",
       designation: "Software Development Engineer",
@@ -97,13 +99,13 @@ const AboutUsPage = () => {
         rishabh_image,
       linkedin: "https://www.linkedin.com/in/rishabh-sharma-99a303254/"
     },
-    {
-      name: "Janhvi Singh",
-      designation: "Digital Marketing Manager",
-      image:
-        janhvi_image,
-      linkedin: "https://www.linkedin.com/in/janhvi-singh-246103227/"
-    },
+    // {
+    //   name: "Janhvi Singh",
+    //   designation: "Digital Marketing Manager",
+    //   image:
+    //     janhvi_image,
+    //   linkedin: "https://www.linkedin.com/in/janhvi-singh-246103227/"
+    // },
   ];
 
   function updateMetaTags() {
@@ -127,6 +129,8 @@ const AboutUsPage = () => {
 
   return (
     <>
+                <Navbar />
+
       <main class="flex  w-full flex-col items-center justify-center text-center mt-10 ">
         <h1 class="mx-auto max-w-4xl font-display text-5xl font-bold tracking-normal text-slate-900 sm:text-7xl">Fikar Nahi{" "}
           <span class="relative whitespace-nowrap text-blue-900">
@@ -190,6 +194,7 @@ const AboutUsPage = () => {
         </div>
       </div>
 
+      <Footer/>
 
     </>
   );

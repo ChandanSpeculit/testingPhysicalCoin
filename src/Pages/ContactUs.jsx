@@ -7,6 +7,7 @@ import { MdEmail } from "react-icons/md";
 import { FiPhone } from "react-icons/fi";
 import { Helmet } from "react-helmet";
 import DocumentMeta from "react-document-meta";
+import Navbar from "../components/Navbar";
 
 
 
@@ -105,6 +106,7 @@ const ContactUs = () => {
 
 
     <>
+    <Navbar/>
       <h1 className="sm:mx-20  p-6  text-3xl lg:text-5xl leading-10 font-bold">Contact Us</h1>
       <div className="flex flex-col md:flex-row sm:mx-20 sm:my-10">
         <form
@@ -208,6 +210,7 @@ const ContactUs = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

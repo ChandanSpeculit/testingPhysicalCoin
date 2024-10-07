@@ -36,6 +36,8 @@ import ParticularProduct from '../Pages/Products/ParticularProduct';
 import CartPage from '../Pages/Products/CartPage';
 import Address from '../Pages/Products/Address';
 import Orders from '../Pages/Products/Orders';
+import ViewAllProduct from '../Pages/Products/ViewAllProduct';
+import ListAllProducts from '../Pages/Products/ListAllProducts';
 
 
 
@@ -44,6 +46,9 @@ const MainStack = () => {
     <>
       <Routes>
       <Route exact path="/" element={<AllProduct />} />
+      <Route exact path="/ListAllProducts" element={<ListAllProducts/>} />
+
+      <Route exact path="/ViewAllProduct" element={<ViewAllProduct />} />
         <Route path="/feature/Learn-Finance" element={<FiydaaEdu />} />
         <Route path="/About" element={<AboutUsPage />} />
         <Route path="/GoldLeasing" element={<GoldLeasing />} />

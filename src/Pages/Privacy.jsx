@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 
 function Privacy() {
@@ -25,6 +27,7 @@ function Privacy() {
 
     return (
         <>
+            <Navbar />
             <div style={{ width: '70%', margin: 'auto', marginTop: '20px', marginBottom: '20px', textAlign: 'justify', fontFamily: 'Poppins' }}>
 
                 <div style={{ margin: 'auto', marginBottom: '20px', textAlign: 'center' }}>
@@ -150,8 +153,8 @@ function Privacy() {
 
                 <p class="text-2xl font-poppins mb-4">Grievance Officer :</p>
                 If You have any grievance with respect to the Platform, please feel free to reach out to the grievance officer, the name and contact details of this Officer have been provided below:<br />
-                <span style={{fontWeight:600}}> Name: Veerkaran Gill</span><br />
-                <span style={{fontWeight:600}}> Email: support@fiydaa.in </span><br /><br />
+                <span style={{ fontWeight: 600 }}> Name: Veerkaran Gill</span><br />
+                <span style={{ fontWeight: 600 }}> Email: support@fiydaa.in </span><br /><br />
 
                 <p class="text-2xl font-poppins mb-4">Contact Us :</p>
                 In case you have any questions or concerns regarding the processing of your Personal Information or this Privacy Policy you may write to us at support@fiydaa.in.
@@ -161,6 +164,7 @@ function Privacy() {
 
 
             </div>
+            <Footer/>
         </>
     )
 }

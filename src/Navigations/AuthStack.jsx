@@ -35,6 +35,8 @@ import Device_IOS_OR_Android from '../Pages/Device_IOS_OR_Android';
 import AllProduct from '../Pages/Products/AllProduct';
 import Login from '../Pages/Login';
 import SignUp from '../Pages/SignUp';
+import ViewAllProduct from "../Pages/Products/ViewAllProduct";
+import ListAllProducts from "../Pages/Products/ListAllProducts";
 
 const AuthStack = () => {
   const navigate = useNavigate();
@@ -43,6 +45,11 @@ const AuthStack = () => {
     <>
       <Routes>
         <Route exact path="/" element={<AllProduct />} />
+        <Route exact path="/ViewAllProduct" element={<ViewAllProduct />} />
+        <Route exact path="/ListAllProducts" element={<ListAllProducts />} />
+
+
+
         <Route path="/feature/Learn-Finance" element={<FiydaaEdu />} />
         <Route path="/About" element={<AboutUsPage />} />
         <Route path="/GoldLeasing" element={<GoldLeasing />} />

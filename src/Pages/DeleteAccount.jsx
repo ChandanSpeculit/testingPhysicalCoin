@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Box from "@mui/material/Box";
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 function DeleteAccount() {
     function updateMetaTags() {
         const titleElement = document.querySelector("title");
@@ -16,6 +18,7 @@ function DeleteAccount() {
     })
     return (
         <>
+            <Navbar />
             <Box
                 sx={{
                     border: "none",
@@ -52,7 +55,7 @@ function DeleteAccount() {
                     </ul>
                 </div>
             </Box>
-
+            <Footer />
 
 
         </>
