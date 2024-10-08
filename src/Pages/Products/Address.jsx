@@ -317,25 +317,27 @@ function Address() {
             },
             body: JSON.stringify(sendData),
         })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                console.log("API response:", data);
-                alert("Payment Done");
-                // Use a slight delay to ensure the alert has time to be shown before redirecting
-                setTimeout(() => {
-                    navigate('/myOrders');
-                }, 3000);
-            })
-            .catch((error) => {
-                console.error('Error adding product to cart:', error);
-                alert("An error occurred. Please try again.");
-            });
-    };
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            // console.log(response)
+            return response.json(); 
+        })
+        .then((data) => {
+            // console.log("PAnkaj Sir",data);  // You can use the parsed data directly
+            if (data.statusCode == 200) {
+                alert("Payment done successfully!");
+            } else {
+                const errorMessage = JSON.parse(data.body).message; 
+                alert(errorMessage); 
+            }
+        })
+        .catch((error) => {
+            console.error('Error adding product to cart:', error);
+            alert("An error occurred. Please try again.");
+        });
+    }
 
 
     return (
