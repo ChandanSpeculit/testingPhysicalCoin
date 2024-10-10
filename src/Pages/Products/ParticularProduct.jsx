@@ -84,7 +84,7 @@ function ParticularProduct() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ categoryId: 5 }), // Empty body since no params are needed
+      body: JSON.stringify({ categoryId: 34 }), // Empty body since no params are needed
     })
       .then((response) => {
         if (!response.ok) {
@@ -109,7 +109,7 @@ function ParticularProduct() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ categoryId: 11 }), // Empty body since no params are needed
+      body: JSON.stringify({ categoryId: 4 }), // Empty body since no params are needed
     })
       .then((response) => {
         if (!response.ok) {
@@ -253,8 +253,9 @@ function ParticularProduct() {
 
                 <div>
                   <button
-                    onClick={handleClick}
-                    className="bg-gradient-to-r from-newDarkBlue via-newLightBlue to-newDarkBlue text-white hover:text-newLightGold text-sm font-poppins font-bold py-2 px-6 rounded-md"
+                    onClick={() => {
+                      navigate('/address', { state: { product, quantity } });
+                    }} className="bg-gradient-to-r from-newDarkBlue via-newLightBlue to-newDarkBlue text-white hover:text-newLightGold text-sm font-poppins font-bold py-2 px-6 rounded-md"
                   >
                     Buy now →
                   </button>
@@ -420,14 +421,17 @@ function ParticularProduct() {
               </div>
 
               <button
+                // onClick={() => {
+                //   const currentPath = window.location.pathname + window.location.search;
+                //   if (!uniqueId) {
+                //     handleClick(currentPath);
+                //   } else {
+                //     // If uniqueId is available, navigate to the address page
+                //     navigate('/address', { state: { product, quantity } });
+                //   }
+                // }}
                 onClick={() => {
-                  const currentPath = window.location.pathname + window.location.search;
-                  if (!uniqueId) {
-                    handleClick(currentPath);
-                  } else {
-                    // If uniqueId is available, navigate to the address page
-                    navigate('/address', { state: { product, quantity } });
-                  }
+                  navigate('/address', { state: { product, quantity } });
                 }}
                 className="bg-gradient-to-r from-newDarkBlue via-newLightBlue to-newDarkBlue text-white hover:text-newLightGold text-sm font-poppins font-bold py-2 px-6 rounded-md"
               >

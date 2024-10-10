@@ -165,10 +165,10 @@ export default function Navbar() {
 
               {userInfo && (
                 <li>
-                  <Link
+                  <Link to="/"
                     onClick={() => {
                       localStorage.clear();  // Clear local storage to sign the user out
-                      navigate("/");         // Navigate to the home page
+                      // navigate("/");         // Navigate to the home page
                       window.location.reload();  // Reload the page to fully reset the state
                     }}
                     className="block py-3 px-4 font-medium text-center text-white bg-newDarkBlue hover:bg-newLightBlue rounded-lg shadow md:inline"

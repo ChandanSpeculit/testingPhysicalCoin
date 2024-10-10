@@ -39,6 +39,7 @@ import ViewAllProduct from "../Pages/Products/ViewAllProduct";
 import ListAllProducts from "../Pages/Products/ListAllProducts";
 import ParticularProduct from "../Pages/Products/ParticularProduct";
 import NotFound from "../Pages/404NotFound";
+import Address from '../Pages/Products/Address';
 
 const AuthStack = () => {
   const navigate = useNavigate();
@@ -50,6 +51,7 @@ const AuthStack = () => {
         <Route exact path="/ViewAllProduct" element={<ViewAllProduct />} />
         <Route exact path="/ListAllProducts" element={<ListAllProducts />} />
         <Route path="/getProductDetails/:productId" element={<ParticularProduct />} />
+        <Route path="/address" element={<Address />} />
 
 
 

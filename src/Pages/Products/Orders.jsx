@@ -391,7 +391,7 @@ function Orders() {
                 </div>
             </div> */}
 
-            <div style={{ width: '80%', margin: 'auto' }}>
+            <div style={{ width: '90%', margin: 'auto' }}>
                 {loading ? (
                     <Box
                         sx={{
@@ -423,7 +423,7 @@ function Orders() {
                     </div>) : (
 
 
-                    <div className="mx-auto max-w-5xl">
+                    <div className="mx-auto max-w-6xl">
                         <div className="gap-4 sm:flex sm:items-center sm:justify-between">
                             <h2 className="text-xl font-semibold text-gray-900 sm:text-2xl">My orders</h2>
 

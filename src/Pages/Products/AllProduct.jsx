@@ -16,7 +16,8 @@ import appStoreButton from "../../assets/images/App Store.png"
 import playStoreButton from "../../assets/images/Play Store.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faShieldHalved } from '@fortawesome/free-solid-svg-icons';
-import {API_GATEWAY} from "../../env"
+import { API_GATEWAY } from "../../env"
+
 
 
 const responsive = {
@@ -137,13 +138,13 @@ const AllProduct = () => {
     };
 
     const bracelates = () => {
-        fetch(`https://rzozy98ys9.execute-api.ap-south-1.amazonaws.com/dev/getAllProductFromAugmont`, {
+        fetch(`${API_GATEWAY}/getAllProductFromAugmont`, {
             method: "POST",
             crossDomain: true,
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ categoryId: 5 }), // Empty body since no params are needed
+            body: JSON.stringify({ categoryId: 34 }), // Empty body since no params are needed
         })
             .then((response) => {
                 if (!response.ok) {
@@ -162,13 +163,13 @@ const AllProduct = () => {
     };
 
     const goldCoinFunction = () => {
-        fetch(`https://rzozy98ys9.execute-api.ap-south-1.amazonaws.com/dev/getAllProductFromAugmont`, {
+        fetch(`${API_GATEWAY}/getAllProductFromAugmont`, {
             method: "POST",
             crossDomain: true,
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ categoryId: 11 }), // Empty body since no params are needed
+            body: JSON.stringify({ categoryId: 4 }), // Empty body since no params are needed
         })
             .then((response) => {
                 if (!response.ok) {
