@@ -9,6 +9,8 @@ import Video from "../assets/images/Fiydaa Video.mp4";
 import VideoThumbnails from "../assets/images/VideoThumbnails.png";
 import FiydaaX from "../assets/images/StepingGoldLeasing.png";
 import FiydaaXLogo from "../assets/images/FiydaaXLogo.png";
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 
 
@@ -244,6 +246,7 @@ function GoldLeasing() {
 
     return (
         <div>
+            <Navbar />
             <section className="max-w-screen-xl mx-auto px-4 py-2 gap-12 text-gray-600 overflow-hidden md:px-8 md:flex justify-between items-center">
                 <div className='flex-col space-y-5 max-w-xl mt-10 '>
                     <button onClick={handleClick} className='inline-flex gap-x-2 items-center rounded-full p-1 pr-6 border text-sm font-medium duration-150 hover:bg-white justify-center sm:justify-start'>
@@ -367,7 +370,7 @@ function GoldLeasing() {
                 }
             </section>
 
-    
+
 
             <div className="max-w-screen-xl mx-auto text-gray-600 md:px-8 mb-10 mt-10">
                 <div className='relative max-w-xl space-y-3 px-4 md:px-0'>
@@ -444,15 +447,15 @@ function GoldLeasing() {
                 <div className="max-w-screen-lg mx-auto px-4 flex-wrap gap-x-12 justify-between items-center md:flex md:px-8 lg:flex-nowrap md:justify-center">
                     <div className="max-w-md space-y-3 md:justify-center">
                         <p className="text-white text-3xl font-semibold sm:text-4xl font-poppins">
-                        Your success drives our success
+                            Your success drives our success
                         </p>
                         <p className="text-gray-300 font-poppins">
-                        We only benefit when you do, so let's build and grow your wealth together.
+                            We only benefit when you do, so let's build and grow your wealth together.
 
                         </p>
                     </div>
                     <div className="flex-none mt-12 text-white lg:mt-0">
-                    <img src={FiydaaXLogo} className='max-w-xs'/>
+                        <img src={FiydaaXLogo} className='max-w-xs' />
 
 
                     </div>
@@ -460,12 +463,13 @@ function GoldLeasing() {
             </div>
 
 
-        
+
 
 
 
             <FAQSection />
 
+            <Footer />
         </div >
     )
 }

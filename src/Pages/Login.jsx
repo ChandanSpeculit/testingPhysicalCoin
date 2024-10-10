@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import Footer from "../../../components/Footer";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { API_GATEWAY_URL } from "../config/env-vars";
 
 import loginImage from "../assets/images/Login_Left_Image.png";
@@ -11,6 +11,7 @@ import { FaArrowLeftLong, FaFacebookF } from "react-icons/fa6";
 import { FaArrowLeft } from "react-icons/fa";
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { Modal, Box, Typography, Button } from '@mui/material';
 
 const Login = () => {
   const LeftContainer = () => {
@@ -32,7 +33,15 @@ const Login = () => {
     const [resendActive, setResendActive] = useState(false);
     const [timer, setTimer] = useState(30);
     const [loading, setLoading] = useState(false); // Add loading state
+    const location = useLocation();
+    const { redirectTo } = location.state || {};
 
+    // Log the redirectTo parameter if it exists
+    React.useEffect(() => {
+      if (redirectTo) {
+        console.log('Redirecting back to:', redirectTo);
+      }
+    }, [redirectTo]);
 
     const handleMobileNumberChange = (e) => {
       setMobileNumber(e.target.value);
@@ -206,7 +215,11 @@ const Login = () => {
           window.localStorage.setItem("userToken", loginResponse);
           window.localStorage.setItem("userInfo", JSON.stringify(userd));
 
-          navigate("/", { replace: true });
+          if (redirectTo) {
+            navigate(redirectTo, { replace: true });
+          } else {
+            navigate("/", { replace: true });
+          }
           window.location.reload();
           console.log("login success");
         } else {
@@ -220,7 +233,7 @@ const Login = () => {
         alert(
           "Error An error occurred while verifying OTP. Please try again."
         );
-      }finally{
+      } finally {
         setLoading(false);
       }
     };
@@ -327,8 +340,8 @@ const Login = () => {
                   Mobile Number *
                 </label>
                 <div className=" w-full md:w-2/3  mt-2 mb-4 p-2 flex gap-3 md:gap-2   items-center border-2 border-newDarkGold rounded-xl">
-                  
-                  <p className= " text-newDarkGold text-xl ">+91 |</p>
+
+                  <p className=" text-newDarkGold text-xl ">+91 |</p>
                   <input
                     type="text"
                     placeholder="85788773880"
@@ -441,35 +454,35 @@ const Login = () => {
               </div>
               <div className="flex mb-4">
                 <button
-                  onClick={handleVerify} 
+                  onClick={handleVerify}
                   disabled={loading}
                   className={`w-2/5 bg-gradient-to-r from-newDarkGold via-newLightGold to-newDarkGold text-newLightBlue font-poppins font-medium px-6 py-2 rounded-md flex items-center justify-center h-12 ${loading ? "opacity-50 cursor-not-allowed" : ""
-                  }`}>
+                    }`}>
                   {loading ? (
-                  <svg
-                    className="animate-spin h-5 w-5 text-newDarkBlue"  // Set color to newDarkBlue
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    ></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                    ></path>
-                  </svg>
+                    <svg
+                      className="animate-spin h-5 w-5 text-newDarkBlue"  // Set color to newDarkBlue
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                      ></path>
+                    </svg>
 
-                ) : (
-                  "Submit OTP"
-                )}
+                  ) : (
+                    "Submit OTP"
+                  )}
                 </button>
               </div>
             </div>

@@ -1,92 +1,9 @@
-// import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-// import { Link, useNavigate } from 'react-router-dom'
-// function CartPage() {
-//     const [quantity, setCartQuantity] = useState(1)
 
-//     const uniqueId = "123456";
-//     const [cart, setcart] = useState([])
-//     const [loading, setLoading] = useState(true);
-
-//     const wbesitePhysicalGoldCart = () => {
-//         fetch(`https://rzozy98ys9.execute-api.ap-south-1.amazonaws.com/dev/websiteApi/wbesitePhysicalGoldCart`, {
-//             method: 'POST',
-//             crossDomain: true,
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify({
-//                 uniqueId: uniqueId,
-//                 getOrUpdate: "get"
-//             }),
-//         })
-//             .then((response) => {
-//                 if (!response.ok) {
-//                     throw new Error('Network response was not ok');
-//                 }
-//                 return response.json();
-//             })
-//             .then((data) => {
-//                 const parsedData = data.body
-//                 setcart(JSON.parse(parsedData.cart))
-//                 const wishList = JSON.parse(parsedData.wishlist)
-//                 setLoading(false);
-//             })
-//             .catch((error) => {
-//                 console.error('There was a problem with the fetch operation:', error);
-//                 setLoading(false);
-//             });
-//     };
-
-//     useEffect(() => {
-//         wbesitePhysicalGoldCart();
-//     });
-//     return (
-//         <div>
-//             <h1>Product Details</h1>
-//             {loading ? (
-//                 <p>Loading product details...</p>
-//             ) : cart ? (
-//                 <div style={{ border: '1px solid #ddd', padding: '20px', margin: '10px', width: '50%', margin: 'auto', display: 'flex' }}>
-//                     <div>
-
-//                         <img
-//                             src={cart.productImage}
-//                             alt={cart.productName}
-//                             style={{ width: '100%', height: 'auto' }}
-//                         />    </div>
-
-//                     <div>
-//                         <h3>{cart.productName}</h3>
-//                         <p>Weight: {cart.weight} gm</p>
-//                         <p>Price: ₹{cart.productPrice[0]?.finalProductPrice}</p>
-//                         <p>Quantity : 2</p>
-//                         <p>{cart.metaDescription}</p>
-//                         <button
-//                             onClick={() => {
-//                                 navigate(`/cartDetails`);
-//                             }}
-//                             style={{ backgroundColor: 'red', padding: 5, marginTop: 10 }}
-//                         >
-//                             Buy Now
-//                         </button>
-
-//                     </div>
-//                 </div>
-
-
-//             ) : (
-//                 <p>Product not found or unable to load details.</p>
-//             )}
-//         </div>
-//     )
-// }
-
-// export default CartPage
 
 
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_GATEWAY } from "../../env"
 
 function CartPage() {
     const [quantity, setCartQuantity] = useState(1); // Initialize quantity
@@ -165,7 +82,7 @@ function CartPage() {
         }
         console.log("senddata", sendData);
         // Now send cart details to the API
-        fetch('https://rzozy98ys9.execute-api.ap-south-1.amazonaws.com/dev//websiteApi/productBuyAndSaveInDB', {
+        fetch(`${API_GATEWAY}/websiteApi/productBuyAndSaveInDB`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

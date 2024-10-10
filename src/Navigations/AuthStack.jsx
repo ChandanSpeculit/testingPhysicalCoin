@@ -37,6 +37,8 @@ import Login from '../Pages/Login';
 import SignUp from '../Pages/SignUp';
 import ViewAllProduct from "../Pages/Products/ViewAllProduct";
 import ListAllProducts from "../Pages/Products/ListAllProducts";
+import ParticularProduct from "../Pages/Products/ParticularProduct";
+import NotFound from "../Pages/404NotFound";
 
 const AuthStack = () => {
   const navigate = useNavigate();
@@ -47,6 +49,7 @@ const AuthStack = () => {
         <Route exact path="/" element={<AllProduct />} />
         <Route exact path="/ViewAllProduct" element={<ViewAllProduct />} />
         <Route exact path="/ListAllProducts" element={<ListAllProducts />} />
+        <Route path="/getProductDetails/:productId" element={<ParticularProduct />} />
 
 
 
@@ -69,7 +72,7 @@ const AuthStack = () => {
 
 
 
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<NotFound />} />
 
         <Route path="/Insights" element={<Insights />}>
           <Route index element={<Navigate replace to="/Insights/DailyReports" />} />
@@ -90,7 +93,7 @@ const AuthStack = () => {
         <Route path="/Blogs/CDeductions" element={<CDeductions />} />
         <Route path="/detectDevice" element={<Device_IOS_OR_Android />} />
 
-        <Route path="/AllProduct" element={<AllProduct />} />
+        {/* <Route path="/AllProduct" element={<AllProduct />} /> */}
         <Route path="/Login" element={<Login />} />
         <Route path="/SignUp" element={<SignUp />} />
 

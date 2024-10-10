@@ -38,6 +38,7 @@ import Address from '../Pages/Products/Address';
 import Orders from '../Pages/Products/Orders';
 import ViewAllProduct from '../Pages/Products/ViewAllProduct';
 import ListAllProducts from '../Pages/Products/ListAllProducts';
+import NotFound from '../Pages/404NotFound';
 
 
 
@@ -45,10 +46,9 @@ const MainStack = () => {
   return (
     <>
       <Routes>
-      <Route exact path="/" element={<AllProduct />} />
-      <Route exact path="/ListAllProducts" element={<ListAllProducts/>} />
-
-      <Route exact path="/ViewAllProduct" element={<ViewAllProduct />} />
+        <Route exact path="/" element={<AllProduct />} />
+        <Route exact path="/ListAllProducts" element={<ListAllProducts />} />
+        <Route exact path="/ViewAllProduct" element={<ViewAllProduct />} />
         <Route path="/feature/Learn-Finance" element={<FiydaaEdu />} />
         <Route path="/About" element={<AboutUsPage />} />
         <Route path="/GoldLeasing" element={<GoldLeasing />} />
@@ -64,7 +64,7 @@ const MainStack = () => {
         <Route path="/Privacy-Policy" element={<Privacy />} />
         <Route path="/Delete-Account" element={<DeleteAccount />} />
         <Route path="/terms_condition" element={<TermsAndCondition />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<NotFound />} />
         <Route path="/Insights" element={<Insights />}>
           <Route index element={<Navigate replace to="/Insights/DailyReports" />} />
           <Route path="DailyReports" element={<DailyReports />} />
@@ -87,10 +87,6 @@ const MainStack = () => {
         <Route path="/cartDetails" element={<CartPage />} />
         <Route path="/address" element={<Address />} />
         <Route path="/myOrders" element={<Orders />} />
-
-
-
-        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
   );

@@ -6,6 +6,12 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { Modal, Box, Typography, IconButton, Button, Divider } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { API_GATEWAY } from "../../env"
+import CircularProgress from '@mui/material/CircularProgress';
+import Backdrop from '@mui/material/Backdrop';
+
 
 function Address() {
     const location = useLocation();
@@ -26,6 +32,7 @@ function Address() {
     const [addressFromBackend, setAddressFromBackend] = useState([])
     const [showModal, setShowModal] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
+    const [showPaymentModal, setShowPaymentModal] = useState(false);
     const [formDetails, setFormDetails] = useState({
         firstName: '',
         lastName: '',
@@ -41,7 +48,7 @@ function Address() {
     });
 
     const getAllStateList = () => {
-        fetch(`https://rzozy98ys9.execute-api.ap-south-1.amazonaws.com/dev/websiteApi/getAllStateList`, {
+        fetch(`${API_GATEWAY}/websiteApi/getAllStateList`, {
             method: 'POST',
             crossDomain: true,
             headers: {
@@ -109,7 +116,7 @@ function Address() {
         setFormDetails({ ...formDetails, state: selectedId });
         findStateNameById(selectedId)
 
-        fetch(`https://rzozy98ys9.execute-api.ap-south-1.amazonaws.com/dev/websiteApi/getAllCityList`, {
+        fetch(`${API_GATEWAY}/websiteApi/getAllCityList`, {
             method: "POST",
             crossDomain: true,
             headers: {
@@ -146,10 +153,12 @@ function Address() {
             alert("Please fill in all required fields.");
             return;
         }
+
         const timestamp = new Date().getTime();
         const mid = 'mid' + uniqueId + '_' + timestamp;
         const productPrice = product.productPrice[0]?.finalProductPrice || 0;
         const totalPrice = productPrice * quantity;
+
         let sendData = {
             reference_id: mid,
             uniqueId: uniqueId,
@@ -162,11 +171,14 @@ function Address() {
             cityName: cityName,
             ...formDetails
         };
-        console.log("senddata", sendData);
+
+        setLoading1(true); // Turn on the loading spinner
+
         if (isChecked) {
             addressForWebsite(); // Ensure this function is defined elsewhere in your code
         }
-        fetch('https://rzozy98ys9.execute-api.ap-south-1.amazonaws.com/dev/websiteApi/productBuyAndSaveInDB', {
+
+        fetch(`${API_GATEWAY}/websiteApi/productBuyAndSaveInDB`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -175,14 +187,17 @@ function Address() {
         })
             .then((response) => response.json())
             .then((data) => {
-                setPaymentTypeResponse(data.paymentLink)
-                setPaymentLink(data.paymentLink.link_url)
+                setPaymentTypeResponse(data.paymentLink);
+                setPaymentLink(data.paymentLink.link_url);
                 if (data.paymentLink?.link_url) {
                     window.location.href = data.paymentLink.link_url;
                 }
             })
             .catch((error) => {
                 console.error('Error adding product to cart:', error);
+            })
+            .finally(() => {
+                setLoading1(false); // Turn off the loading spinner after redirect or error
             });
     };
 
@@ -197,7 +212,7 @@ function Address() {
         };
         console.log("senddata", sendData);
         // Now send cart details to the API
-        fetch('https://rzozy98ys9.execute-api.ap-south-1.amazonaws.com/dev//websiteApi/addressForWebsite', {
+        fetch(`${API_GATEWAY}/websiteApi/addressForWebsite`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -222,7 +237,7 @@ function Address() {
         };
 
         // Now send cart details to the API
-        fetch('https://rzozy98ys9.execute-api.ap-south-1.amazonaws.com/dev/websiteApi/addressForWebsite', {
+        fetch(`${API_GATEWAY}/websiteApi/addressForWebsite`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -260,8 +275,6 @@ function Address() {
         setIsChecked(!isChecked);
     };
 
-    const [showPaymentModal, setShowPaymentModal] = useState(false);
-
     const handlePrePaymentCheck = () => {
         // Destructure form details
         const { firstName, lastName, mobileNumber, email, addressType, landmark, postalCode, panCardNumber, dob, state, city } = formDetails;
@@ -276,8 +289,6 @@ function Address() {
             setShowPaymentModal(true);
         }
     };
-
-
 
     const testingPhysicalOrderLambda = () => {
         const timestamp = new Date().getTime();
@@ -317,35 +328,35 @@ function Address() {
             },
             body: JSON.stringify(sendData),
         })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            // console.log(response)
-            return response.json(); 
-        })
-        .then((data) => {
-            // console.log("PAnkaj Sir",data);  // You can use the parsed data directly
-            if (data.statusCode == 200) {
-                alert("Payment done successfully!");
-            } else {
-                const errorMessage = JSON.parse(data.body).message; 
-                alert(errorMessage); 
-            }
-        })
-        .catch((error) => {
-            console.error('Error adding product to cart:', error);
-            alert("An error occurred. Please try again.");
-        });
-    }
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log("API response:", data);
+                alert("Payment Done");
+                // Use a slight delay to ensure the alert has time to be shown before redirecting
+                setTimeout(() => {
+                    navigate('/myOrders');
+                }, 3000);
+            })
+            .catch((error) => {
+                console.error('Error adding product to cart:', error);
+                alert("An error occurred. Please try again.");
+            });
+    };
+
+    const [loading1, setLoading1] = useState(false);
 
 
     return (
 
         <>
             <Navbar />
-            <section className="max-w-7xl mx-auto mt-4">
 
+            <section className="max-w-7xl mx-auto mt-4">
                 <Link
                     to={`/getProductDetails/${product.id}`}
                     className="flex items-center gap-2 text-black mb-8 font-poppins"
@@ -525,109 +536,204 @@ function Address() {
                             </div>
 
 
-
-                            {showPaymentModal && (
-                                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                                    <div className="w-full max-w-lg p-6 bg-white rounded-lg overflow-hidden shadow-lg relative">
-                                        <button
-                                            onClick={() => setShowPaymentModal(false)}
-                                            className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
-                                        >
-                                            &times;
-                                        </button>
-                                        <h3 className="text-lg font-medium font-poppins text-newDarkBlue mb-4">Payment</h3>
-
-                                        <div class="flow-root">
-                                            <div class="-my-3 mb-7 divide-y divide-gray-200 dark:divide-gray-800">
-                                                <dl class="flex items-center justify-between gap-4 py-3">
-                                                    <dt class="text-base font-normal font-poppins text-newDarkBlue">Item Price</dt>
-                                                    <dd class="text-base font-medium font-poppins text-newDarkGold">₹ {product.productPrice[0]?.finalProductPrice}</dd>
-                                                </dl>
-
-                                                <dl class="flex items-center justify-between gap-4 py-3">
-                                                    <dt class="text-base font-normal font-poppins text-newDarkBlue">Quantity</dt>
-                                                    <dd class="text-base font-medium font-poppins text-newDarkGold">{quantity}</dd>
-                                                </dl>
-
-                                                <dl class="flex items-center justify-between gap-4 py-3">
-                                                    <dt class="text-base font-normal font-poppins text-newDarkBlue">GST 3% (Inclusive)</dt>
-                                                    <dd class="text-base font-medium font-poppins text-newDarkGold">₹ {(product.productPrice[0]?.finalProductPrice * 0.03 * quantity).toFixed(2)}
-                                                    </dd>
-                                                </dl>
-
-                                                <dl class="flex items-center justify-between gap-4 py-3">
-                                                    <dt class="text-base font-normal font-poppins text-newDarkBlue">Shipping Price (Inclusive)</dt>
-                                                    <dd class="text-base font-medium font-poppins text-newDarkGold">₹ {product.shipping}</dd>
-                                                </dl>
-
-                                                <dl class="flex items-center justify-between gap-4 py-3">
-                                                    <dt class="text-base font-semibold font-poppins text-newDarkBlue">Total</dt>
-                                                    <dd class="text-base font-medium font-poppins text-newDarkGold">₹ {(product.productPrice[0]?.finalProductPrice * quantity).toFixed(2)}</dd>
-                                                </dl>
-                                            </div>
-                                        </div>
-
-                                        <p className="text-base font-poppins text-newDarkBlue mb-6">
-                                            This product will be delivered to this address within 7-10 business days.
-                                        </p>
-
-
-                                        <div className="p-4 border mb-10 border-gray-300 rounded-lg cursor-pointer">
-                                            <p className="font-poppins text-base text-newDarkBlue">
-                                                Name: {formDetails.firstName} {formDetails.lastName}
-                                            </p>
-                                            <p className="font-poppins text-sm text-gray-600"> Phone Number: {formDetails.mobileNumber}</p>
-
-                                            <p className="font-poppins text-sm text-gray-600">Address:  {formDetails.addressType}, {formDetails.landmark}, {cityName}, {selectedStateName} </p>
-                                            <p className="font-poppins text-sm text-gray-600">Postal Code: {formDetails.postalCode}</p>
-                                        </div>
-                                        <button
-                                            onClick={() => {
-                                                testingPhysicalOrderLambda();
-                                                setShowPaymentModal(false);
-                                            }}
-                                            className="flex w-full font-poppins items-center justify-center rounded-lg bg-newDarkBlue px-5 py-2.5 text-sm font-medium text-white"
-                                        >
-                                            Pay Now
-                                        </button>
-                                    </div>
-                                </div>
-                            )}
-
-                            {showModal && (
-                                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                                    <div className="w-full max-w-lg p-6 bg-white rounded-lg overflow-hidden shadow-lg relative">
-                                        <button
-                                            onClick={() => {
-                                                setShowModal(false);
-                                                document.body.style.overflow = 'auto';
-                                            }}
-                                            className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
-                                        >
-                                            &times;
-                                        </button>
-                                        <h3 className="text-lg font-medium font-poppins text-newDarkBlue mb-4">All Addresses</h3>
-                                        <div className="max-h-96 overflow-y-auto space-y-3 custom-scrollbar">
-                                            {addressFromBackend.map((address, index) => (
-                                                <div key={index} className="p-4 border border-gray-300 rounded-lg cursor-pointer" onClick={() => handleAddressSelect(address)}>
-                                                    <p className="font-poppins text-base text-newDarkBlue">
-                                                        {address.firstName} {address.lastName}
-                                                    </p>
-                                                    <p className="font-poppins text-sm text-gray-600">
-                                                        {address.cityName}, {address.stateName}
-                                                    </p>
-                                                    <p className="font-poppins text-sm text-gray-600">{address.phoneNumber}</p>
-                                                    <p className="font-poppins text-sm text-gray-600">{address.postalCode}</p>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
                         </div>
                     </div>
                 </div>
             </section>
+
+            <Modal
+                open={showModal}
+                onClose={() => {
+                    setShowModal(false);
+                    document.body.style.overflow = 'auto';
+                }}
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description"
+            >
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: '100%',
+                        maxWidth: 600,
+                        bgcolor: 'white',
+                        boxShadow: 24,
+                        p: 4,
+                        borderRadius: '8px',
+                        maxHeight: '90vh',
+                        overflowY: 'auto',
+                    }}
+                >
+                    <IconButton
+                        onClick={() => {
+                            setShowModal(false);
+                            document.body.style.overflow = 'auto';
+                        }}
+                        sx={{
+                            position: 'absolute',
+                            top: 8,
+                            right: 8,
+                            color: 'gray',
+                        }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
+
+                    <Typography id="modal-title" variant="h6" component="h3" sx={{ mb: 2, fontFamily: 'Poppins', color: '#123456' }}>
+                        All Addresses
+                    </Typography>
+
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                        {addressFromBackend.map((address, index) => (
+                            <Box
+                                key={index}
+                                sx={{
+                                    p: 2,
+                                    border: '1px solid #ccc',
+                                    borderRadius: '8px',
+                                    cursor: 'pointer',
+                                    '&:hover': { borderColor: '#888' },
+                                }}
+                                onClick={() => handleAddressSelect(address)}
+                            >
+                                <Typography sx={{ fontFamily: 'Poppins', fontSize: '16px', color: '#123456' }}>
+                                    {address.firstName} {address.lastName}
+                                </Typography>
+                                <Typography sx={{ fontFamily: 'Poppins', fontSize: '14px', color: '#666' }}>
+                                    {address.cityName}, {address.stateName}
+                                </Typography>
+                                <Typography sx={{ fontFamily: 'Poppins', fontSize: '14px', color: '#666' }}>
+                                    {address.phoneNumber}
+                                </Typography>
+                                <Typography sx={{ fontFamily: 'Poppins', fontSize: '14px', color: '#666' }}>
+                                    {address.postalCode}
+                                </Typography>
+                            </Box>
+                        ))}
+                    </Box>
+                </Box>
+            </Modal>
+
+            <Modal
+                open={showPaymentModal}
+                onClose={() => setShowPaymentModal(false)}
+                aria-labelledby="payment-modal-title"
+                aria-describedby="payment-modal-description"
+            >
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: '100%',
+                        maxWidth: 600,
+                        bgcolor: 'white',
+                        boxShadow: 24,
+                        p: 4,
+                        borderRadius: '8px',
+                        maxHeight: '90vh',
+                        overflowY: 'auto',
+                    }}
+                >
+                    <IconButton
+                        onClick={() => setShowPaymentModal(false)}
+                        sx={{
+                            position: 'absolute',
+                            top: 8,
+                            right: 8,
+                            color: 'gray',
+                        }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
+
+                    <Typography id="payment-modal-title" variant="h6" component="h3" sx={{ mb: 4, fontFamily: 'Poppins', color: '#123456' }}>
+                        Payment
+                    </Typography>
+
+                    <Box sx={{ mb: 2 }}>
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', py: 1 }}>
+                            <Typography sx={{ fontFamily: 'Poppins', fontSize: '16px', color: '#123456' }}>Item Price</Typography>
+                            <Typography sx={{ fontFamily: 'Poppins', fontSize: '16px', color: '#DAA520' }}>
+                                ₹ {product.productPrice[0]?.finalProductPrice}
+                            </Typography>
+                        </Box>
+                        <Divider />
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', py: 1 }}>
+                            <Typography sx={{ fontFamily: 'Poppins', fontSize: '16px', color: '#123456' }}>Quantity</Typography>
+                            <Typography sx={{ fontFamily: 'Poppins', fontSize: '16px', color: '#DAA520' }}>{quantity}</Typography>
+                        </Box>
+                        <Divider />
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', py: 1 }}>
+                            <Typography sx={{ fontFamily: 'Poppins', fontSize: '16px', color: '#123456' }}>GST 3% (Inclusive)</Typography>
+                            <Typography sx={{ fontFamily: 'Poppins', fontSize: '16px', color: '#DAA520' }}>
+                                ₹ {(product.productPrice[0]?.finalProductPrice * 0.03 * quantity).toFixed(2)}
+                            </Typography>
+                        </Box>
+                        <Divider />
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', py: 1 }}>
+                            <Typography sx={{ fontFamily: 'Poppins', fontSize: '16px', color: '#123456' }}>Shipping Price (Inclusive)</Typography>
+                            <Typography sx={{ fontFamily: 'Poppins', fontSize: '16px', color: '#DAA520' }}>
+                                ₹ {product.shipping}
+                            </Typography>
+                        </Box>
+                        <Divider />
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', py: 1 }}>
+                            <Typography sx={{ fontFamily: 'Poppins', fontWeight: 600, fontSize: '16px', color: '#123456' }}>Total</Typography>
+                            <Typography sx={{ fontFamily: 'Poppins', fontSize: '16px', color: '#DAA520' }}>
+                                ₹ {(product.productPrice[0]?.finalProductPrice * quantity).toFixed(2)}
+                            </Typography>
+                        </Box>
+                    </Box>
+
+                    <Typography sx={{ fontFamily: 'Poppins', fontSize: '16px', color: '#123456', mb: 1 }}>
+                        This product will be delivered to this address within 7-10 business days.
+                    </Typography>
+
+                    <Box sx={{ p: 2, border: '1px solid #ccc', borderRadius: '8px', mb: 6 }}>
+                        <Typography sx={{ fontFamily: 'Poppins', fontSize: '16px', color: '#123456' }}>
+                            Name: {formDetails.firstName} {formDetails.lastName}
+                        </Typography>
+                        <Typography sx={{ fontFamily: 'Poppins', fontSize: '14px', color: '#666' }}>
+                            Phone Number: {formDetails.mobileNumber}
+                        </Typography>
+                        <Typography sx={{ fontFamily: 'Poppins', fontSize: '14px', color: '#666' }}>
+                            Address: {formDetails.addressType}, {formDetails.landmark}, {cityName}, {selectedStateName}
+                        </Typography>
+                        <Typography sx={{ fontFamily: 'Poppins', fontSize: '14px', color: '#666' }}>
+                            Postal Code: {formDetails.postalCode}
+                        </Typography>
+                    </Box>
+
+                    <div>
+                        {/* Loading Backdrop */}
+                        <Backdrop
+                            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                            open={loading1} // Backdrop is visible when loading is true
+                        >
+                            <CircularProgress color="inherit" />
+                        </Backdrop>
+
+                        {/* Button */}
+                        <Button
+                            fullWidth
+                            sx={{
+                                fontFamily: 'Poppins',
+                                bgcolor: '#123456',
+                                color: 'white',
+                                py: 1.5,
+                                '&:hover': { bgcolor: '#0F3460' },
+                            }}
+                            onClick={handleBuy}
+                        >
+                            Pay Now
+                        </Button>
+                    </div>
+                </Box>
+            </Modal>
             <Footer />
         </>
     );

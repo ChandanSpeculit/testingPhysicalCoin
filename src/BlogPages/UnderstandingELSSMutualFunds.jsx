@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import writtenblog4 from "../assets/BlogsImages/writtenBlog4.png"
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
 
 function UnderstandingELSSMutualFunds() {
 
@@ -51,6 +53,7 @@ function UnderstandingELSSMutualFunds() {
 
   return (
     <>
+      <Navbar />
 
       <section>
         <div className="max-w-screen-xl mx-auto px-4 py-4 gap-12 text-gray-600 md:px-8 xl:flex">
@@ -166,12 +169,12 @@ function UnderstandingELSSMutualFunds() {
                 <li className="font-poppins mt-2">
                   <h3 className="text-xl font-semibold inline">Lock-in Period :</h3>
                   <span className="text-gray-600 ml-2">
-                  The three-year lock-in period means you cannot withdraw your money before three years. While this is shorter compared to other tax-saving options, it is still a commitment. Make sure you are comfortable with this period before investing.               </span>
+                    The three-year lock-in period means you cannot withdraw your money before three years. While this is shorter compared to other tax-saving options, it is still a commitment. Make sure you are comfortable with this period before investing.               </span>
                 </li>
                 <li className="font-poppins mt-2">
                   <h3 className="text-xl font-semibold inline">Long-Term Capital Gains Tax :</h3>
                   <span className="text-gray-600 ml-2">
-                  Returns from ELSS funds held for more than a year are treated as Long Term Capital Gains (LTCG). These gains are taxed at 10% without the benefit of indexation. While this tax is lower compared to other forms of income, it is essential to factor it into your investment decision
+                    Returns from ELSS funds held for more than a year are treated as Long Term Capital Gains (LTCG). These gains are taxed at 10% without the benefit of indexation. While this tax is lower compared to other forms of income, it is essential to factor it into your investment decision
                   </span>
                 </li>
               </ul>
@@ -187,7 +190,7 @@ function UnderstandingELSSMutualFunds() {
                 Conclusion :
               </h2>
               <p className="text-gray-600 mt-3 font-poppins">
-              An ELSS fund is an excellent investment option for those looking to save on taxes while also seeking higher returns. With a short lock-in period, potential for high returns, and tax benefits, ELSS funds can be a valuable addition to your investment portfolio. However, like all investments, they come with their own set of risks. It is crucial to do your research, understand your risk tolerance, and invest accordingly.
+                An ELSS fund is an excellent investment option for those looking to save on taxes while also seeking higher returns. With a short lock-in period, potential for high returns, and tax benefits, ELSS funds can be a valuable addition to your investment portfolio. However, like all investments, they come with their own set of risks. It is crucial to do your research, understand your risk tolerance, and invest accordingly.
               </p>
             </div>
 
@@ -203,6 +206,8 @@ function UnderstandingELSSMutualFunds() {
           </a>
         </div>
       </section>
+
+      <Footer />
     </>
   )
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Assuming you're using react-router for navigation
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import {API_GATEWAY} from "../../env"
 
 const ProductCard = ({ product, navigate }) => {
     return (
@@ -15,12 +16,12 @@ const ProductCard = ({ product, navigate }) => {
             <p className="mt-2 font-poppins">Weight: {product.weight} gm</p>
             <p className="font-medium font-poppins">Price: ₹ {product.productPrice[0]?.finalProductPrice}</p>
             <p className="text-gray-600">{product.metaDescription}</p>
-            <button
+            {/* <button
                 className="bg-newDarkBlue text-white py-1 px-2 text-sm rounded mt-2 self-center"
                 onClick={() => navigate(`/getProductDetails/${product.id}`)}
             >
                 View Details
-            </button>
+            </button> */}
         </div>
     );
 };
@@ -39,7 +40,7 @@ const ListAllProducts = () => {
 
 
     const getBracelates = () => {
-        fetch(`https://rzozy98ys9.execute-api.ap-south-1.amazonaws.com/dev/getAllProductFromAugmont`, {
+        fetch(`${API_GATEWAY}/getAllProductFromAugmont`, {
             method: "POST",
             crossDomain: true,
             headers: {
@@ -64,7 +65,7 @@ const ListAllProducts = () => {
     };
 
     const getGoldCoins = () => {
-        fetch(`https://rzozy98ys9.execute-api.ap-south-1.amazonaws.com/dev/getAllProductFromAugmont`, {
+        fetch(`${API_GATEWAY}/getAllProductFromAugmont`, {
             method: "POST",
             crossDomain: true,
             headers: {

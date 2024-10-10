@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import writtenblog1 from "../assets/BlogsImages/writtenblog2.png"
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 function DirectvsRegularMutualFund() {
 
@@ -95,7 +97,7 @@ function DirectvsRegularMutualFund() {
 
     return (
         <>
-
+            <Navbar />
             <section>
                 <div className="max-w-screen-xl mx-auto px-4 py-4 gap-12 text-gray-600 md:px-8 xl:flex">
                     <div className="space-y-5  mx-auto text-center xl:text-left">
@@ -286,6 +288,7 @@ function DirectvsRegularMutualFund() {
                     </a>
                 </div>
             </section>
+            <Footer />
         </>
     )
 }

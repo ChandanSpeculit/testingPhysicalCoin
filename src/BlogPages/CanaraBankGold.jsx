@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import writtenblog1 from "../assets/BlogsImages/CanaraBankGold.png"
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
 
 function CanaraBankGold() {
 
@@ -50,7 +52,7 @@ function CanaraBankGold() {
 
     return (
         <>
-
+            <Navbar />
             <section>
                 <div className="max-w-screen-xl mx-auto px-4 py-4 gap-12 text-gray-600 md:px-8 xl:flex">
                     <div className="space-y-5  mx-auto text-center xl:text-left">
@@ -338,7 +340,7 @@ function CanaraBankGold() {
                                 Conclusion :
                             </h2>
                             <p className="text-gray-600 mt-3 font-poppins">
-                            Canara Bank’s gold loan interest rates for 2024 are attractive and provide a reliable financial solution. Whether you need funds for personal or business needs, a Canara Bank gold loan can be a smart choice. With competitive interest rates, minimal documentation, and flexible repayment options, it’s worth considering for your financial needs. FiYDAA offers a wide range of investment opportunities beyond digital gold. Explore your options now!
+                                Canara Bank’s gold loan interest rates for 2024 are attractive and provide a reliable financial solution. Whether you need funds for personal or business needs, a Canara Bank gold loan can be a smart choice. With competitive interest rates, minimal documentation, and flexible repayment options, it’s worth considering for your financial needs. FiYDAA offers a wide range of investment opportunities beyond digital gold. Explore your options now!
                             </p>
                         </div>
 
@@ -354,6 +356,7 @@ function CanaraBankGold() {
                     </a>
                 </div>
             </section>
+            <Footer />
         </>
     )
 }

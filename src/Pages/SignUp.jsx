@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import loginImage from "../assets/images/Login_Left_Image.png";
 import logo from "../assets/images/logoWhite.png";
 import { API_GATEWAY_URL } from "../config/env-vars";
@@ -166,6 +166,18 @@ const SignUp = () => {
       </div>
     );
   };
+
+
+  const location = useLocation();
+  const { redirectTo } = location.state || {};
+  // console.log('Redirecting back to:', redirectTo);
+
+  React.useEffect(() => {
+    if (redirectTo) {
+      // console.log('Redirecting back to:', redirectTo);
+    }
+  }, [redirectTo]);
+
 
   const RightContainer = () => {
     const navigate = useNavigate();
@@ -351,8 +363,11 @@ const SignUp = () => {
           console.log("success signup");
           await window.localStorage.setItem("userToken", body.token);
           await window.localStorage.setItem("userInfo", JSON.stringify(body.userdata));
-          navigate("/");
-
+          if (redirectTo) {
+            navigate(redirectTo, { replace: true });
+          } else {
+            navigate("/", { replace: true });
+          }
         }
         // navigation.navigate("Home");
         else {
@@ -462,7 +477,7 @@ const SignUp = () => {
                 Please Enter a valid Mobile Number
               </p>
             )}
-            
+
             <div className="flex-row mt-8 mb-4  ">
 
               {/* <label className="text-newDarkGold text-lg font-poppins ">
@@ -567,7 +582,7 @@ const SignUp = () => {
                 onClick={handleResend}
                 disabled={!resendActive} // Disable the button when it's not active
                 className={`text-newDarkGold ${!resendActive && "opacity-50 cursor-not-allowed" // Apply styles when button is disabled
-                }`}
+                  }`}
               >
                 {resendActive ? "Resend OTP" : `Resend OTP (${timer}s)`}
               </button>
@@ -576,19 +591,19 @@ const SignUp = () => {
               <button
                 onClick={handleVerify}
                 className="w-3/5 sm:w-2/5 bg-gradient-to-r from-newDarkGold via-newLightGold to-newDarkGold text-newLightBlue font-poppins font-medium px-6 py-2 rounded-md"
-                >
+              >
                 Submit OTP
               </button>
             </div>
           </div>
         )}
 
-          <Link
-            to="/login"
-            className=" ml-4 mr-4 mb-8 sm:ml-16 text-newDarkGold font-poppins font-medium hover:text-newLightGold "
-            >
-            Already have an account ? Click to login
-          </Link>
+        <Link
+          to="/login"
+          className=" ml-4 mr-4 mb-8 sm:ml-16 text-newDarkGold font-poppins font-medium hover:text-newLightGold "
+        >
+          Already have an account ? Click to login
+        </Link>
       </div>
     );
   };
